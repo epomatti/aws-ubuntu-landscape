@@ -23,5 +23,5 @@ variable "ec2_ubuntu_server_ami" {
 }
 
 variable "ec2_ubuntu_server_instance_type" {
-  type = number
+  type = string
 }
