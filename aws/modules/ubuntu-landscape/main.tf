@@ -87,14 +87,24 @@ data "aws_vpc" "selected" {
   id = var.vpc_id
 }
 
-# resource "aws_security_group_rule" "allow_ingress_vpc_https" {
-#   type              = "ingress"
-#   from_port         = 443
-#   to_port           = 443
-#   protocol          = "TCP"
-#   cidr_blocks       = [data.aws_vpc.selected.cidr_block]
-#   security_group_id = aws_security_group.nat_instance.id
-# }
+resource "aws_security_group_rule" "allow_ingress_http" {
+  type              = "ingress"
+  from_port         = 80
+  to_port           = 80
+  protocol          = "TCP"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.nat_instance.id
+}
+
+
+resource "aws_security_group_rule" "allow_ingress_https" {
+  type              = "ingress"
+  from_port         = 443
+  to_port           = 443
+  protocol          = "TCP"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.nat_instance.id
+}
 
 resource "aws_security_group_rule" "allow_egress_internet_http" {
   type              = "egress"
