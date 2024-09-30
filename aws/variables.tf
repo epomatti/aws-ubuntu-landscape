@@ -17,3 +17,11 @@ variable "ec2_landscape_instance_type" {
 variable "ec2_landscape_volume_size" {
   type = number
 }
+
+variable "ec2_ubuntu_server_ami" {
+  type = string
+}
+
+variable "ec2_ubuntu_server_instance_type" {
+  type = number
+}

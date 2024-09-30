@@ -26,3 +26,12 @@ module "ubuntu_landscape" {
   subnet_id     = module.vpc.default_public_subnet_id
   volume_size   = var.ec2_landscape_volume_size
 }
+
+module "ubuntu_server" {
+  source        = "./modules/ubuntu-server"
+  ami           = var.ec2_ubuntu_server_ami
+  instance_type = var.ec2_ubuntu_server_instance_type
+  vpc_id        = module.vpc.vpc_id
+  subnet_id     = module.vpc.default_public_subnet_id
+}
+
