@@ -13,3 +13,7 @@ variable "ec2_landscape_ami" {
 variable "ec2_landscape_instance_type" {
   type = string
 }
+
+variable "ec2_landscape_volume_size" {
+  type = number
+}

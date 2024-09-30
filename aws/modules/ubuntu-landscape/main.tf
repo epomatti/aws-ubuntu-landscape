@@ -28,7 +28,8 @@ resource "aws_instance" "nat_instance" {
   ebs_optimized = true
 
   root_block_device {
-    encrypted = true
+    encrypted   = true
+    volume_size = var.volume_size
   }
 
   lifecycle {
@@ -105,6 +106,16 @@ resource "aws_security_group_rule" "allow_ingress_https" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.nat_instance.id
 }
+
+resource "aws_security_group_rule" "allow_ingress_grpc" {
+  type              = "ingress"
+  from_port         = 6554
+  to_port           = 6554
+  protocol          = "TCP"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.nat_instance.id
+}
+
 
 resource "aws_security_group_rule" "allow_egress_internet_http" {
   type              = "egress"
