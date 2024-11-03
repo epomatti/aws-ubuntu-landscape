@@ -21,3 +21,7 @@ variable "vpc_id" {
 variable "volume_size" {
   type = number
 }
+
+variable "ec2_landscape_create_elastic_ip" {
+  type = bool
+}

@@ -3,10 +3,17 @@ resource "aws_iam_instance_profile" "nat_instance" {
   role = aws_iam_role.nat_instance.id
 }
 
+resource "aws_eip" "default" {
+  count    = var.ec2_landscape_create_elastic_ip ? 1 : 0
+  instance = aws_instance.nat_instance.id
+  domain   = "vpc"
+}
+
 data "aws_subnet" "selected" {
   id = var.subnet_id
 }
 
+# TODO: Rename to default
 resource "aws_instance" "nat_instance" {
   ami           = var.ami
   instance_type = var.instance_type

@@ -18,13 +18,14 @@ module "vpc" {
 }
 
 module "ubuntu_landscape" {
-  source        = "./modules/ubuntu-landscape"
-  workload      = var.workload
-  ami           = var.ec2_landscape_ami
-  instance_type = var.ec2_landscape_instance_type
-  vpc_id        = module.vpc.vpc_id
-  subnet_id     = module.vpc.default_public_subnet_id
-  volume_size   = var.ec2_landscape_volume_size
+  source                          = "./modules/ubuntu-landscape"
+  workload                        = var.workload
+  ami                             = var.ec2_landscape_ami
+  instance_type                   = var.ec2_landscape_instance_type
+  vpc_id                          = module.vpc.vpc_id
+  subnet_id                       = module.vpc.default_public_subnet_id
+  volume_size                     = var.ec2_landscape_volume_size
+  ec2_landscape_create_elastic_ip = var.ec2_landscape_create_elastic_ip
 }
 
 module "ubuntu_server" {

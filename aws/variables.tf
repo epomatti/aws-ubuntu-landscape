@@ -6,6 +6,10 @@ variable "workload" {
   type = string
 }
 
+variable "ec2_landscape_create_elastic_ip" {
+  type = string
+}
+
 variable "ec2_landscape_ami" {
   type = string
 }
