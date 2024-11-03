@@ -36,3 +36,8 @@ module "ubuntu_server" {
   vpc_id        = module.vpc.vpc_id
   subnet_id     = module.vpc.default_public_subnet_id
 }
+
+module "ssm" {
+  source                       = "./modules/ssm"
+  landscape_server_instance_id = module.ubuntu_landscape.instance_id
+}
