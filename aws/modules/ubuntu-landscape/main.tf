@@ -17,7 +17,7 @@ resource "aws_instance" "nat_instance" {
 
   availability_zone    = data.aws_subnet.selected.availability_zone
   iam_instance_profile = aws_iam_instance_profile.nat_instance.id
-  user_data            = file("${path.module}/userdata/ubuntus.sh")
+  user_data            = file("${path.module}/userdata/ubuntu.sh")
 
   metadata_options {
     http_endpoint = "enabled"
