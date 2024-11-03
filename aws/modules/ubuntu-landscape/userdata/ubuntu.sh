@@ -5,5 +5,4 @@ export DEBIAN_FRONTEND=noninteractive
 apt update
 apt upgrade -y
 
-
-reboot
+apt install -y ca-certificates software-properties-common

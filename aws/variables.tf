@@ -18,6 +18,10 @@ variable "ec2_landscape_volume_size" {
   type = number
 }
 
+variable "create_ubuntu_server" {
+  type = bool
+}
+
 variable "ec2_ubuntu_server_ami" {
   type = string
 }

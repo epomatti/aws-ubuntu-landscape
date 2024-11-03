@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.69.0"
+      version = "5.74.0"
     }
   }
 }
@@ -28,10 +28,10 @@ module "ubuntu_landscape" {
 }
 
 module "ubuntu_server" {
+  count         = var.create_ubuntu_server ? 1 : 0
   source        = "./modules/ubuntu-server"
   ami           = var.ec2_ubuntu_server_ami
   instance_type = var.ec2_ubuntu_server_instance_type
   vpc_id        = module.vpc.vpc_id
   subnet_id     = module.vpc.default_public_subnet_id
 }
-
