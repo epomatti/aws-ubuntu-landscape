@@ -225,6 +225,13 @@ Then, run the audit command:
 sudo usg audit <PROFILE>
 ```
 
+To access the file from another user:
+
+```sh
+cp usg-report-xxx.html /home/user/Desktop/
+chown <user>: /home/<user>/Desktop/usg-report-20241110.1302.html
+```
+
 To apply for a set of systems:
 
 ```sh
