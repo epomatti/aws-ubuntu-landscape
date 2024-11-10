@@ -5,9 +5,13 @@
 Create the `.auto.tfvars` variables file:
 
 ```sh
-# Open the file and fill in the required parameters
 cp config/template.tfvars .auto.tfvars
 ```
+
+Set the required variables:
+
+- `landscape_server_fqdn` - This will be the internet FQDN for the Landscape server. It is best to use a real domain for this.
+- `landscape_certbot_email` - Required while setting `certbot` certificates.
 
 Create the infrastructure:
 
@@ -25,6 +29,29 @@ This project currently uses the `quickstart` mode for installation. The followin
 - [Landscape self-hosted documentation][3]
 - [Landscape self-hosted setup][4]
 
+Elevate your privileges in the server session:
+
+```sh
+sudo su -
+```
+
+Make sure cloud init executed properly
+
+```sh
+cloud-init status
+```
+
+Set the session variables:
+
+```sh
+export FQDN=$(aws ssm get-parameter --name "landscape-server-instance-id" --query "Parameter.Value" --output text)
+export CERTBOT_EMAIL=$(aws ssm get-parameter --name "landscape-server-instance-id" --query "Parameter.Value" --output text)
+```
+
+```sh
+pro attach
+```
+
 
 ## Landscape Server
 
@@ -35,7 +62,7 @@ This project currently uses the `quickstart` mode for installation. The followin
 
 
 # EMAIL="YOUR-EMAIL@ADDRESS.COM"
-# sudo certbot --apache --non-interactive --no-redirect --agree-tos --email $EMAIL --domains $(hostname --long)
+# sudo certbot --apache --non-interactive --no-redirect --agree-tos --email $CERTBOT_EMAIL --domains $(hostname --long)
 ```
 
 ## Ubuntu Desktop
