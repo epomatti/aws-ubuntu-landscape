@@ -105,11 +105,18 @@ lsctl restart
 This project uses a locally deployed bear metal remote Ubuntu 22.04 Desktop. Create a [Ubuntu image][5]. The recommended burning tool is [Balena][6].
 
 > [!NOTE]
+> Using Ubuntu 22.04 as of the time of this project Ubuntu Pro des not support 24.04 USG, which is part of this scope of experimentation.
+
+Make sure all packages are updated:
+
+```sh
+sudo apt update
+sudo apt upgrade -y
+```
 
 Set up XRDP to manage your machine remotely. This project follows this Digital Ocean's article.
 
 ```sh
-sudo apt update
 sudo apt install xfce4 xfce4-goodies -y
 sudo apt install xrdp -y
 sudo systemctl status xrdp
@@ -145,7 +152,7 @@ These are examples of commands to be executed in the Ubuntu Desktop client machi
 sudo apt-get update
 sudo apt-get install -y landscape-client
 # Replace the domain
-sudo landscape-config --computer-title "MyDesktop" --account-name standalone  --url https://landscape.example.com/message-system --ping-url http://landscape.example.com/ping
+sudo landscape-config --computer-title "MyUbuntuDesktop" --account-name standalone  --url https://landscape.example.com/message-system --ping-url http://landscape.example.com/ping
 ```
 
 > [!NOTE]
@@ -176,6 +183,24 @@ sudo service landscape-client restart
 
 Ubuntu Pro supports [Ubuntu Security Guide (USG)][9].
 
+Following the [installation guide][10]:
+
+> [!NOTE]
+> This is already covered by the previous steps already executed
+
+1. Install the UA client
+2. Attach the subscription
+
+Enable and install USG:
+
+```sh
+sudo ua enable usg
+sudo apt install usg
+```
+
+https://ubuntu.com/security/certifications/docs/2204/usg/cis/compliance
+https://downloads.cisecurity.org/#/
+
 https://ubuntu.com/engage/a-guide-to-infrastructure-hardening
 https://www.cisecurity.org/benchmark/ubuntu_linux
 
@@ -191,3 +216,4 @@ https://www.cisecurity.org/benchmark/ubuntu_linux
 [7]: https://www.digitalocean.com/community/tutorials/how-to-enable-remote-desktop-protocol-using-xrdp-on-ubuntu-22-04
 [8]: https://askubuntu.com/a/906249
 [9]: https://ubuntu.com/security/certifications/docs/usg
+[10]: https://ubuntu.com/security/certifications/docs/disa-stig/installation
