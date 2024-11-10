@@ -217,6 +217,9 @@ A system `reboot` is required after this point.
 
 Then, run the audit command:
 
+> [!TIP]
+> Once the audit below is completed, access the HTML page for analysis
+
 ```sh
 # Profiles: cis_level1_workstation, cis_level2_workstation
 sudo usg audit <PROFILE>
