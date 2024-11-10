@@ -10,6 +10,10 @@ variable "landscape_server_fqdn" {
   type = string
 }
 
+variable "landscape_certbot_email" {
+  type = string
+}
+
 variable "ec2_landscape_create_elastic_ip" {
   type = string
 }

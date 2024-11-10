@@ -41,4 +41,5 @@ module "ssm" {
   source                       = "./modules/ssm"
   landscape_server_fqdn        = var.landscape_server_fqdn
   landscape_server_instance_id = module.ubuntu_landscape.instance_id
+  landscape_certbot_email      = var.landscape_certbot_email
 }

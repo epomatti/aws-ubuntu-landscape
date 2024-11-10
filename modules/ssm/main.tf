@@ -9,3 +9,9 @@ resource "aws_ssm_parameter" "landscape_server" {
   type  = "String"
   value = var.landscape_server_instance_id
 }
+
+resource "aws_ssm_parameter" "landscape_certbot_email" {
+  name  = "landscape-server-certbot-email"
+  type  = "String"
+  value = var.landscape_certbot_email
+}
