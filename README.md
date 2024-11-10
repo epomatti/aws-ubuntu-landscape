@@ -181,7 +181,7 @@ sudo service landscape-client restart
 
 ## Ubuntu hardening
 
-Ubuntu Pro supports [Ubuntu Security Guide (USG)][9].
+Ubuntu Pro supports [Ubuntu Security Guide (USG)][9]. For quick guide, the [tutorial][14] can be o good starting point.
 
 Following the [installation guide][10]:
 
@@ -198,13 +198,39 @@ sudo ua enable usg
 sudo apt install usg
 ```
 
-https://ubuntu.com/security/certifications/docs/2204/usg/cis/compliance
-https://downloads.cisecurity.org/#/
+This project uses CIS benchmarks, for which there are different [profiles][11]:
 
-https://ubuntu.com/engage/a-guide-to-infrastructure-hardening
-https://www.cisecurity.org/benchmark/ubuntu_linux
+> [!TIP]
+> Check the [CIS Benchmark publications][12] for in-depth details about each profile
 
+- Level 1: Balanced
+- Level 2: 
 
+To apply the benchmark, select one of the profiles:
+
+```sh
+# Profiles: cis_level1_workstation, cis_level2_workstation
+sudo usg fix <PROFILE>
+```
+
+A system `reboot` is required after this point.
+
+Then, run the audit command:
+
+```sh
+# Profiles: cis_level1_workstation, cis_level2_workstation
+sudo usg audit <PROFILE>
+```
+
+To apply for a set of systems:
+
+```sh
+sudo usg generate-fix <PROFILE> --output fix.sh
+```
+
+If required, explore the [customization][13] options.
+
+Other references include the [Ubuntu engagement][15] page, and the [CIS Benchmark Ubuntu][16] page.
 
 
 [1]: https://ubuntu.com/pro/dashboard
@@ -217,3 +243,9 @@ https://www.cisecurity.org/benchmark/ubuntu_linux
 [8]: https://askubuntu.com/a/906249
 [9]: https://ubuntu.com/security/certifications/docs/usg
 [10]: https://ubuntu.com/security/certifications/docs/disa-stig/installation
+[11]: https://ubuntu.com/security/certifications/docs/2204/usg/cis/compliance
+[12]: https://downloads.cisecurity.org/#/
+[13]: https://ubuntu.com/security/certifications/docs/2204/usg/cis/customization
+[14]: https://ubuntu.com/tutorials/comply-with-cis-or-disa-stig-on-ubuntu#1-overview
+[15]: https://ubuntu.com/engage/a-guide-to-infrastructure-hardening
+[16]: https://www.cisecurity.org/benchmark/ubuntu_linux
