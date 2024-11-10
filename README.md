@@ -57,9 +57,6 @@ dig landscape.example.com
 
 Attach the server to your Ubuntu Pro subscription. You're currently allowed 5 machines in the Personal free subscription.
 
-> [!NOTE]
-> 
-
 ```sh
 pro attach
 ```
@@ -85,45 +82,103 @@ apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y landscape-server
 
 Install your certificate:
 
+> [!IMPORTANT]
+> Make sure the certificate is correctly issued and installed
+
 ```sh
-certbot --apache --non-interactive --no-redirect --agree-tos --email $CERTBOT_EMAIL --domains $(hostname --long)
+certbot --non-interactive --apache --no-redirect --agree-tos --email $CERTBOT_EMAIL --domains $FQDN
 ```
 
 Your server should be ready for use at `https://landscape.example.com`.
 
+Access the server and create your administrator account.
+
+In case this come in handy, these are the commands to manage the Landscape Server CTL:
+
+```sh
+lsctl status
+lsctl restart
+```
+
 ## Ubuntu Desktop
 
-This project uses a locally deployed bear metal remote Ubuntu 24.04 Desktop. Create a [Ubuntu image][5]. The recommended burning tool is [Balena][6].
+This project uses a locally deployed bear metal remote Ubuntu 22.04 Desktop. Create a [Ubuntu image][5]. The recommended burning tool is [Balena][6].
 
+> [!NOTE]
+
+Set up XRDP to manage your machine remotely. This project follows this Digital Ocean's article.
+
+```sh
+sudo apt update
+sudo apt install xfce4 xfce4-goodies -y
+sudo apt install xrdp -y
+sudo systemctl status xrdp
 ```
 
+Once logged into your Ubuntu Desktop workstation, attach the machine for Ubuntu landscape management.
+
+The `ubuntu-pro-client` should already be installed. Just make sure it is updated:
+
+```sh
+# This will update the client ot the latest version 
+sudo apt install -y ubuntu-pro-client
 ```
 
+> [!NOTE]
+> You should be using a Let's Encrypt certificated issued earlier in this documentation. In for some reason you're opting for a self-signed approach, check how to [set it up in the client][8].
+
+Attach the Ubuntu Desktop machine to a license:
+
+```sh
+sudo pro attach
+```
+
+Now, from your Ubuntu Landscape Server, follow the instructions on how to register a computer vi the menu. The path should be something like this:
+
+```
+https://landscape.example.com/account/standalone/how-to-register
+```
+
+These are examples of commands to be executed in the Ubuntu Desktop client machine:
+
+```sh
+sudo apt-get update
+sudo apt-get install -y landscape-client
+# Replace the domain
+sudo landscape-config --computer-title "MyDesktop" --account-name standalone  --url https://landscape.example.com/message-system --ping-url http://landscape.example.com/ping
+```
+
+> [!NOTE]
+> Make sure to check Ubuntu Pro status in Landscape to confirm it has been properly registered.
 
 
-check the hash
+### Enable script execution (administrator)
 
-
-
-
-
-https://ubuntu.com/landscape/docs/self-hosted-landscape
-
-
-Enable script execution (administrators)
-
+In case script execution needs to be enabled.
 
 ```sh
 sudo -u landscape bash -x /opt/canonical/landscape/scripts/update_security_db.sh
 ```
 
+Configuration file:
+
 ```sh
 /etc/landscape/client.conf
 ```
 
+Restarting the client:
+
 ```sh
 sudo service landscape-client restart
 ```
+
+## Ubuntu hardening
+
+Ubuntu Pro supports [Ubuntu Security Guide (USG)][9].
+
+https://ubuntu.com/engage/a-guide-to-infrastructure-hardening
+https://www.cisecurity.org/benchmark/ubuntu_linux
+
 
 
 
@@ -133,3 +188,6 @@ sudo service landscape-client restart
 [4]: https://ubuntu.com/landscape/install
 [5]: https://ubuntu.com/tutorials/create-a-usb-stick-on-windows
 [6]: https://etcher.balena.io/
+[7]: https://www.digitalocean.com/community/tutorials/how-to-enable-remote-desktop-protocol-using-xrdp-on-ubuntu-22-04
+[8]: https://askubuntu.com/a/906249
+[9]: https://ubuntu.com/security/certifications/docs/usg

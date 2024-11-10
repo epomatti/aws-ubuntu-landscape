@@ -5,8 +5,10 @@
     "dictionaries": [],
     "words": [
         "certbot",
+        "lsctl",
         "noninteractive",
-        "quickstart"
+        "quickstart",
+        "xrdp"
     ],
     "ignoreWords": [],
     "import": []
