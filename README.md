@@ -41,34 +41,65 @@ Make sure cloud init executed properly
 cloud-init status
 ```
 
-Set the session variables:
+> [!IMPORTANT]
+>  Make sure you don't skip the next step. Change the "example.com" to your owned domain of choice.
+
+Setup your domain registry for the `landscape.example.com` to the public IP or AWS EC2 instance name.
+
+> [!NOTE]
+> The project is created with an Elastic IP, therefore the public IP address will not change.
+
+Make sure that the DNS has replicated successfully before continuing:
 
 ```sh
-export FQDN=$(aws ssm get-parameter --name "landscape-server-instance-id" --query "Parameter.Value" --output text)
-export CERTBOT_EMAIL=$(aws ssm get-parameter --name "landscape-server-instance-id" --query "Parameter.Value" --output text)
+dig landscape.example.com
 ```
+
+Attach the server to your Ubuntu Pro subscription. You're currently allowed 5 machines in the Personal free subscription.
+
+> [!NOTE]
+> 
 
 ```sh
 pro attach
 ```
 
-
-## Landscape Server
-
+Set the session variables:
 
 ```sh
-# hostnamectl set-hostname "$FQDN"
-# apt update && apt-get install -y landscape-server-quickstart
-
-
-# EMAIL="YOUR-EMAIL@ADDRESS.COM"
-# sudo certbot --apache --non-interactive --no-redirect --agree-tos --email $CERTBOT_EMAIL --domains $(hostname --long)
+export FQDN=$(aws ssm get-parameter --name "landscape-server-fqdn" --query "Parameter.Value" --output text)
+export CERTBOT_EMAIL=$(aws ssm get-parameter --name "landscape-server-certbot-email" --query "Parameter.Value" --output text)
 ```
+
+Set your hostname using variables:
+
+```sh
+hostnamectl set-hostname "$FQDN"
+```
+
+Install Landscape:
+
+```sh
+apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y landscape-server-quickstart
+```
+
+Install your certificate:
+
+```sh
+certbot --apache --non-interactive --no-redirect --agree-tos --email $CERTBOT_EMAIL --domains $(hostname --long)
+```
+
+Your server should be ready for use at `https://landscape.example.com`.
 
 ## Ubuntu Desktop
 
-https://etcher.balena.io/
-https://ubuntu.com/tutorials/create-a-usb-stick-on-windows
+This project uses a locally deployed bear metal remote Ubuntu 24.04 Desktop. Create a [Ubuntu image][5]. The recommended burning tool is [Balena][6].
+
+```
+
+```
+
+
 
 check the hash
 
@@ -100,3 +131,5 @@ sudo service landscape-client restart
 [2]: https://ubuntu.com/landscape/docs/quickstart-deployment
 [3]: https://ubuntu.com/landscape/docs/self-hosted-landscape
 [4]: https://ubuntu.com/landscape/install
+[5]: https://ubuntu.com/tutorials/create-a-usb-stick-on-windows
+[6]: https://etcher.balena.io/

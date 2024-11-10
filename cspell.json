@@ -5,6 +5,7 @@
     "dictionaries": [],
     "words": [
         "certbot",
+        "noninteractive",
         "quickstart"
     ],
     "ignoreWords": [],
