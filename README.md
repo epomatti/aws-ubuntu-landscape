@@ -204,7 +204,7 @@ This project uses CIS benchmarks, for which there are different [profiles][11]:
 > Check the [CIS Benchmark publications][12] for in-depth details about each profile
 
 - Level 1: Balanced
-- Level 2: 
+- Level 2: Restrictive
 
 To apply the benchmark, select one of the profiles:
 
