@@ -111,6 +111,45 @@ To use the a instance for this purpose, just flip the switch:
 create_ubuntu_pro_server = true
 ```
 
+Check the pro licensing status:
+
+```sh
+sudo pro status --all
+```
+
+Make sure that the Landscape client is installed:
+
+```sh
+sudo apt-get update
+sudo apt-get install landscape-client -y
+```
+
+Link the instance to Landscape SaaS:
+
+```sh
+# sudo is required to read /etc/landscape/client.conf
+sudo landscape-config --computer-title "<TITLE>" \
+  --account-name "<ACCOUNT>" \
+  --registration-key "<KEY>" \
+  --http-proxy="" \
+  --https-proxy="" \
+  --script-users="root,landscape,nobody" \
+  --tags="server"
+```
+
+Enable USG:
+
+```sh
+sudo pro enable usg
+sudo apt install usg
+```
+
+Apply a profile:
+
+```sh
+sudo usg fix cis_level1_server
+```
+
 ## Ubuntu Desktop
 
 This project uses a locally deployed bear metal remote Ubuntu 22.04 Desktop. Create a [Ubuntu image][5]. The recommended burning tool is [Balena][6].
