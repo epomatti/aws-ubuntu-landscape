@@ -14,6 +14,10 @@ variable "landscape_certbot_email" {
   type = string
 }
 
+variable "create_ubuntu_landscape" {
+  type = bool
+}
+
 variable "ec2_landscape_create_elastic_ip" {
   type = string
 }
@@ -39,5 +43,18 @@ variable "ec2_ubuntu_server_ami" {
 }
 
 variable "ec2_ubuntu_server_instance_type" {
+  type = string
+}
+
+### Ubuntu Pro Server ###
+variable "create_ubuntu_pro_server" {
+  type = bool
+}
+
+variable "ec2_ubuntu_pro_server_ami" {
+  type = string
+}
+
+variable "ec2_ubuntu_pro_server_instance_type" {
   type = string
 }

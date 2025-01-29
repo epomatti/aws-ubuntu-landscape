@@ -100,6 +100,17 @@ lsctl status
 lsctl restart
 ```
 
+## Ubuntu Pro Server
+
+> [!NOTE]
+> As of this writing, USG is not yet available for [24.04](https://ubuntu.com/security/certifications/docs/usg/cis).
+
+To use the a instance for this purpose, just flip the switch:
+
+```terraform
+create_ubuntu_pro_server = true
+```
+
 ## Ubuntu Desktop
 
 This project uses a locally deployed bear metal remote Ubuntu 22.04 Desktop. Create a [Ubuntu image][5]. The recommended burning tool is [Balena][6].
