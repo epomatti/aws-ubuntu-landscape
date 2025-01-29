@@ -128,20 +128,21 @@ Link the instance to Landscape SaaS:
 
 ```sh
 # sudo is required to read /etc/landscape/client.conf
-sudo landscape-config --computer-title "<TITLE>" \
+sudo landscape-config --computer-title "aws-ubuntu-pro-server" \
   --account-name "<ACCOUNT>" \
-  --registration-key "<KEY>" \
   --http-proxy="" \
   --https-proxy="" \
   --script-users="root,landscape,nobody" \
-  --tags="server"
+  --tags="server,aws"
 ```
+
+Approve
 
 Enable USG:
 
 ```sh
 sudo pro enable usg
-sudo apt install usg
+sudo apt install usg -y
 ```
 
 Apply a profile:
@@ -292,6 +293,14 @@ If required, explore the [customization][13] options.
 
 Other references include the [Ubuntu engagement][15] page, and the [CIS Benchmark Ubuntu][16] page.
 
+## Repositores
+
+## Profiles
+
+- Repository
+- Packages
+- Upgrade
+- Removal
 
 [1]: https://ubuntu.com/pro/dashboard
 [2]: https://ubuntu.com/landscape/docs/quickstart-deployment
