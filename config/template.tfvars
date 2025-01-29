@@ -6,6 +6,7 @@ workload   = "landscape"
 landscape_certbot_email = "you@example.com"
 
 # Ubuntu Landscape instance
+create_ubuntu_landscape         = false
 landscape_server_fqdn           = "landscape@example.com"
 ec2_landscape_create_elastic_ip = false
 ec2_landscape_ami               = "ami-01ebf7c0e446f85f9" # Ubuntu 24.04 LTS ARM64
