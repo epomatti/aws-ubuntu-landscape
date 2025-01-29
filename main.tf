@@ -46,7 +46,7 @@ module "ubuntu_server" {
   subnet_id     = module.vpc.default_public_subnet_id
 }
 
-module "ubuntu_server" {
+module "ubuntu_pro_server" {
   count         = var.create_ubuntu_pro_server ? 1 : 0
   source        = "./modules/ubuntu-pro-server"
   ami           = var.ec2_ubuntu_pro_server_ami
