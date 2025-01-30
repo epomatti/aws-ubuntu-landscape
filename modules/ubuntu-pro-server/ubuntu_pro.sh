@@ -4,6 +4,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 apt update && apt upgrade -y
 
-apt-get install landscape-client -y
+ua enable usg
+apt install usg landscape-client -y
 
 reboot

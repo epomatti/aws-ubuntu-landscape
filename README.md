@@ -113,18 +113,14 @@ create_ubuntu_pro_server = true
 
 Check the pro licensing status:
 
+> [!NOTE]
+> USG and the Landscape client should already be installed. USG should already be enabled.
+
 ```sh
 sudo pro status --all
 ```
 
-Make sure that the Landscape client is installed:
-
-```sh
-sudo apt-get update
-sudo apt-get install landscape-client -y
-```
-
-Link the instance to Landscape SaaS:
+Link the instance to Landscape SaaS and then approve the registration:
 
 ```sh
 # sudo is required to read /etc/landscape/client.conf
@@ -134,15 +130,6 @@ sudo landscape-config --computer-title "aws-ubuntu-pro-server" \
   --https-proxy="" \
   --script-users="root,landscape,nobody" \
   --tags="server,aws"
-```
-
-Approve
-
-Enable USG:
-
-```sh
-sudo pro enable usg
-sudo apt install usg -y
 ```
 
 Apply a profile:
@@ -297,10 +284,25 @@ Other references include the [Ubuntu engagement][15] page, and the [CIS Benchmar
 
 ## Profiles
 
+Demonstrate the usage of the [Profiles](https://ubuntu.com/landscape/docs/explanation-package-profile) feature:
+
 - Repository
 - Packages
 - Upgrade
 - Removal
+
+## API
+
+https://ubuntu.com/landscape/docs/make-rest-api-requests
+
+https://ubuntu.com/landscape/docs/api-rest-packages
+
+
+## Miscellaneous
+
+https://ubuntu.com/landscape/docs/other-classic-web-portal-tasks
+
+
 
 [1]: https://ubuntu.com/pro/dashboard
 [2]: https://ubuntu.com/landscape/docs/quickstart-deployment
