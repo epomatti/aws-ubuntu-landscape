@@ -58,3 +58,7 @@ variable "ec2_ubuntu_pro_server_ami" {
 variable "ec2_ubuntu_pro_server_instance_type" {
   type = string
 }
+
+variable "ec2_ubuntu_pro_server_os_volume_size" {
+  type = number
+}

@@ -13,3 +13,7 @@ variable "subnet_id" {
 variable "vpc_id" {
   type = string
 }
+
+variable "ec2_ubuntu_pro_server_os_volume_size" {
+  type = number
+}

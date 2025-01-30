@@ -21,7 +21,7 @@ resource "aws_instance" "default" {
 
   availability_zone    = data.aws_subnet.selected.availability_zone
   iam_instance_profile = aws_iam_instance_profile.default.id
-  user_data            = file("${path.module}/ubuntu_pro.sh")
+  user_data            = file("${path.module}/user_data/ubuntu_pro.sh")
 
   metadata_options {
     http_endpoint = "enabled"
@@ -33,7 +33,7 @@ resource "aws_instance" "default" {
 
   root_block_device {
     encrypted   = true
-    volume_size = 20
+    volume_size = var.ec2_ubuntu_pro_server_os_volume_size
   }
 
   lifecycle {

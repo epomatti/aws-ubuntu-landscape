@@ -47,10 +47,11 @@ module "ubuntu_server" {
 }
 
 module "ubuntu_pro_server" {
-  count         = var.create_ubuntu_pro_server ? 1 : 0
-  source        = "./modules/ubuntu-pro-server"
-  ami           = var.ec2_ubuntu_pro_server_ami
-  instance_type = var.ec2_ubuntu_pro_server_instance_type
-  vpc_id        = module.vpc.vpc_id
-  subnet_id     = module.vpc.default_public_subnet_id
+  count                                = var.create_ubuntu_pro_server ? 1 : 0
+  source                               = "./modules/ubuntu-pro-server"
+  ami                                  = var.ec2_ubuntu_pro_server_ami
+  instance_type                        = var.ec2_ubuntu_pro_server_instance_type
+  vpc_id                               = module.vpc.vpc_id
+  subnet_id                            = module.vpc.default_public_subnet_id
+  ec2_ubuntu_pro_server_os_volume_size = var.ec2_ubuntu_pro_server_os_volume_size
 }
