@@ -116,6 +116,9 @@ Check the pro licensing status:
 > [!NOTE]
 > USG and the Landscape client should already be installed. USG should already be enabled.
 
+> [!WARNING]
+> Livepatch is currently [not supported](https://ubuntu.com/security/livepatch/docs/livepatch/explanation/which-are-the-supported-architectures) for ARM64 systems
+
 ```sh
 sudo pro status --all
 ```
@@ -130,6 +133,18 @@ sudo landscape-config --computer-title "aws-ubuntu-pro-server" \
   --https-proxy="" \
   --script-users="root,landscape,nobody" \
   --tags="server,aws"
+```
+
+Enable script execution:
+
+```sh
+sudo landscape-config --include-manager-plugins=ScriptExecution --script-users=root,landscape,nobody
+```
+
+Restart the service:
+
+```sh
+sudo service landscape-client restart
 ```
 
 Apply a profile:
@@ -280,29 +295,73 @@ If required, explore the [customization][13] options.
 
 Other references include the [Ubuntu engagement][15] page, and the [CIS Benchmark Ubuntu][16] page.
 
+## VirtualBox
+
+Simplest way might be to use VirtualBox with Vagrant:
+
+> [!NOTE]
+> USG currently not supported for 24.04
+
+```sh
+mkdir -p vagrant/ubuntu-jammy
+cd vagrant/ubuntu-jammy
+
+vagrant init ubuntu/jammy
+vagrant up
+vagrant ssh
+```
+
+Setup Ubuntu Pro:
+
+```sh
+sudo apt update && sudo apt upgrade -y
+sudo apt install -y ubuntu-advantage-tools
+```
+
+Attach to a subscription:
+
+```sh
+sudo pro attach
+```
+
+Enable and install USG, the Landscape Client:
+
+```sh
+sudo pro enable usg
+sudo apt install -y usg landscape-client
+```
+
+Register to Landscape:
+
+```sh
+sudo landscape-config --computer-title "VagrantUbuntu" \
+  --account-name "<ACCOUNT>" \
+  --http-proxy="" \
+  --https-proxy="" \
+  --script-users="root,landscape,nobody"
+```
+
 ## Repositores
 
 ## Profiles
+
+This [YouTube video](https://youtu.be/LreS6DhboYM) gives a run through the Profiles feature.
 
 Demonstrate the usage of the [Profiles](https://ubuntu.com/landscape/docs/explanation-package-profile) feature:
 
 - Repository
 - Packages
-- Upgrade
+- [Upgrade](https://ubuntu.com/landscape/docs/managing-computers#heading--manage-upgrade-profiles)
 - Removal
 
 ## API
 
-https://ubuntu.com/landscape/docs/make-rest-api-requests
-
-https://ubuntu.com/landscape/docs/api-rest-packages
+Direct interaction with the API is possible via [API Endpoints](https://ubuntu.com/landscape/docs/make-rest-api-requests), such as with the [Packages API](https://ubuntu.com/landscape/docs/api-rest-packages).
 
 
 ## Miscellaneous
 
-https://ubuntu.com/landscape/docs/other-classic-web-portal-tasks
-
-
+General configurations of various types: https://ubuntu.com/landscape/docs/other-classic-web-portal-tasks
 
 [1]: https://ubuntu.com/pro/dashboard
 [2]: https://ubuntu.com/landscape/docs/quickstart-deployment
