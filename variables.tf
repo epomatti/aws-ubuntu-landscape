@@ -6,6 +6,7 @@ variable "workload" {
   type = string
 }
 
+### Landscape ###
 variable "landscape_server_fqdn" {
   type = string
 }
@@ -33,6 +34,12 @@ variable "ec2_landscape_instance_type" {
 variable "ec2_landscape_volume_size" {
   type = number
 }
+
+variable "ec2_use_spot_instance" {
+  type = bool
+}
+
+### Ubuntu Server ###
 
 variable "create_ubuntu_server" {
   type = bool

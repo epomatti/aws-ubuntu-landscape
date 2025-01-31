@@ -1,11 +1,15 @@
-resource "aws_iam_instance_profile" "nat_instance" {
-  name = "${var.workload}-profile"
-  role = aws_iam_role.nat_instance.id
+locals {
+  name = "landscape-host"
+}
+
+resource "aws_iam_instance_profile" "default" {
+  name = "${local.name}-profile"
+  role = aws_iam_role.default.id
 }
 
 resource "aws_eip" "default" {
   count    = var.ec2_landscape_create_elastic_ip ? 1 : 0
-  instance = aws_instance.nat_instance.id
+  instance = aws_instance.default.id
   domain   = "vpc"
 }
 
@@ -13,18 +17,24 @@ data "aws_subnet" "selected" {
   id = var.subnet_id
 }
 
-# TODO: Rename to default
-resource "aws_instance" "nat_instance" {
+resource "aws_instance" "default" {
   ami           = var.ami
   instance_type = var.instance_type
 
   associate_public_ip_address = true
   subnet_id                   = var.subnet_id
-  vpc_security_group_ids      = [aws_security_group.nat_instance.id]
+  vpc_security_group_ids      = [aws_security_group.default.id]
 
   availability_zone    = data.aws_subnet.selected.availability_zone
-  iam_instance_profile = aws_iam_instance_profile.nat_instance.id
+  iam_instance_profile = aws_iam_instance_profile.default.id
   user_data            = file("${path.module}/userdata/ubuntu.sh")
+
+  dynamic "instance_market_options" {
+    for_each = var.ec2_use_spot_instance ? [1] : []
+    content {
+      market_type = "spot"
+    }
+  }
 
   metadata_options {
     http_endpoint = "enabled"
@@ -48,14 +58,14 @@ resource "aws_instance" "nat_instance" {
   }
 
   tags = {
-    Name = var.workload
+    Name = local.name
   }
 }
 
 ### IAM Role ###
 
-resource "aws_iam_role" "nat_instance" {
-  name = "${var.workload}-nat"
+resource "aws_iam_role" "default" {
+  name = local.name
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
@@ -77,17 +87,17 @@ data "aws_iam_policy" "AmazonSSMManagedInstanceCore" {
 }
 
 resource "aws_iam_role_policy_attachment" "ssm-managed-instance-core" {
-  role       = aws_iam_role.nat_instance.name
+  role       = aws_iam_role.default.name
   policy_arn = data.aws_iam_policy.AmazonSSMManagedInstanceCore.arn
 }
 
-resource "aws_security_group" "nat_instance" {
-  name        = "ec2-ssm-${var.workload}-nat"
+resource "aws_security_group" "default" {
+  name        = "ec2-ssm-${local.name}"
   description = "Controls access for EC2 via Session Manager"
   vpc_id      = var.vpc_id
 
   tags = {
-    Name = "sg-ssm-${var.workload}-nat"
+    Name = "sg-ssm-${local.name}"
   }
 }
 
@@ -101,7 +111,7 @@ resource "aws_security_group_rule" "allow_ingress_http" {
   to_port           = 80
   protocol          = "TCP"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.nat_instance.id
+  security_group_id = aws_security_group.default.id
 }
 
 
@@ -111,7 +121,7 @@ resource "aws_security_group_rule" "allow_ingress_https" {
   to_port           = 443
   protocol          = "TCP"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.nat_instance.id
+  security_group_id = aws_security_group.default.id
 }
 
 resource "aws_security_group_rule" "allow_ingress_grpc" {
@@ -120,7 +130,7 @@ resource "aws_security_group_rule" "allow_ingress_grpc" {
   to_port           = 6554
   protocol          = "TCP"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.nat_instance.id
+  security_group_id = aws_security_group.default.id
 }
 
 
@@ -130,7 +140,7 @@ resource "aws_security_group_rule" "allow_egress_internet_http" {
   to_port           = 80
   protocol          = "TCP"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.nat_instance.id
+  security_group_id = aws_security_group.default.id
 }
 
 resource "aws_security_group_rule" "allow_egress_internet_https" {
@@ -139,5 +149,5 @@ resource "aws_security_group_rule" "allow_egress_internet_https" {
   to_port           = 443
   protocol          = "TCP"
   cidr_blocks       = ["0.0.0.0/0"]
-  security_group_id = aws_security_group.nat_instance.id
+  security_group_id = aws_security_group.default.id
 }
