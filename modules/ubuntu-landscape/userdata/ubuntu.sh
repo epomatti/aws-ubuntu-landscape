@@ -17,3 +17,5 @@ snap install certbot --classic
 curl "https://awscli.amazonaws.com/awscli-exe-linux-$awsCliArchitecture.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 ./aws/install
+
+reboot
