@@ -331,14 +331,28 @@ sudo pro enable usg
 sudo apt install -y usg landscape-client
 ```
 
-Register to Landscape:
+Set up the configuration file:
+
+> [!TIP]
+> The [documentation](https://ubuntu.com/landscape/docs/configure-landscape-client) have guidelines for CM tools such as Puppet or Ansible.
+
+```
+[client]
+log_level = info 
+url = https://{FQDN}/message-system
+ping_url = http://{FQDN}/ping
+data_path = /var/lib/landscape/client
+registration_key = {REGISTRATION_KEY}
+computer_title = {COMPUTER_TITLE}
+account_name = {ACCOUNT_NAME}
+include_manager_plugins = ScriptExecution
+script_users = root,landscape,nobody
+```
+
+With the file set, register the machine:
 
 ```sh
-sudo landscape-config --computer-title "VagrantUbuntu" \
-  --account-name "<ACCOUNT>" \
-  --http-proxy="" \
-  --https-proxy="" \
-  --script-users="root,landscape,nobody"
+sudo landscape-config
 ```
 
 Apply a USG a profile:
