@@ -341,6 +341,12 @@ sudo landscape-config --computer-title "VagrantUbuntu" \
   --script-users="root,landscape,nobody"
 ```
 
+Apply a USG a profile:
+
+```sh
+sudo usg fix cis_level1_server
+```
+
 ## Repositores
 
 ## Profiles
