@@ -306,7 +306,7 @@ Simplest way might be to use VirtualBox with Vagrant:
 mkdir -p vagrant/ubuntu-jammy
 cd vagrant/ubuntu-jammy
 
-vagrant init ubuntu/jammy
+vagrant init ubuntu/jammy64
 vagrant up
 vagrant ssh
 ```
