@@ -347,6 +347,34 @@ Apply a USG a profile:
 sudo usg fix cis_level1_server
 ```
 
+## Monitoring
+
+Here's a New Relic example setup with log [forwarding](https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/#manual):
+
+Configuration is declared in the `logging.yml` file:
+
+```
+/etc/newrelic-infra/logging.d/logging.yml
+```
+
+Forward all the Landscape client logs:
+
+```yaml
+logs:
+  - name: landscape-client-logs
+    file: /var/log/landscape/*.log
+    attributes:
+      logtype: landscape-client
+      environment: sandbox
+```
+
+Quick commands to manage the agents:
+
+```sh
+sudo systemctl <start|stop|restart|status> newrelic-infra
+sudo service landscape-client restart
+```
+
 ## Repositores
 
 ## Profiles
