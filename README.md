@@ -311,6 +311,15 @@ vagrant up
 vagrant ssh
 ```
 
+To increase the VM performance, set custom values:
+
+```ruby
+config.vm.provider "virtualbox" do |vb|
+  vb.memory = "2048"
+  vb.cpus = "2"
+end
+```
+
 Setup Ubuntu Pro:
 
 ```sh
