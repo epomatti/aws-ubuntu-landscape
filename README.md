@@ -340,7 +340,7 @@ sudo pro enable usg
 sudo apt install -y usg landscape-client
 ```
 
-Set up the configuration file:
+Set up the configuration file `/etc/landscape/client.conf`:
 
 > [!TIP]
 > The [documentation](https://ubuntu.com/landscape/docs/configure-landscape-client) have guidelines for CM tools such as Puppet or Ansible.
@@ -384,12 +384,24 @@ Configuration can be changed in the `client.conf` file:
 
 For local debugging this might might be useful:
 
-```
-# Numbers are in seconds
-ping_interval = 5
-package_monitor_interval = 60
-exchange_interval = 120
-apt_update_interval = 300
+```conf
+# The number of seconds between server exchanges
+exchange_interval = 900 # 15 minutes
+
+# The number of seconds between urgent exchanges with the server.
+urgent_exchange_interval = 60 # 1 minute
+
+# The number of seconds between pings.
+ping_interval = 30
+
+# The number of seconds between apt update calls.
+apt_update_interval = 21600
+
+# The number of seconds between package monitor runs.
+package_monitor_interval = 1800
+
+# The number of seconds between snap monitor runs.
+snap_monitor_interval = 1800
 ```
 
 ## Troubleshooting
