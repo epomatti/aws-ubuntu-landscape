@@ -361,6 +361,19 @@ Apply a USG a profile:
 sudo usg fix cis_level1_server
 ```
 
+## Tuning
+
+The client can read several variables to 
+
+An example is provided in the [repository](https://github.com/canonical/landscape-client/blob/main/example.conf), and this is a sample [question](https://answers.launchpad.net/landscape-client/+question/403745).
+
+
+For local debugging this might might be useful:
+
+```
+ping_interval = 5
+```
+
 ## Monitoring
 
 Here's a New Relic example setup with log [forwarding](https://docs.newrelic.com/docs/logs/forward-logs/forward-your-logs-using-infrastructure-agent/#manual):
