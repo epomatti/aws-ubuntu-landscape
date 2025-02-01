@@ -363,15 +363,40 @@ sudo usg fix cis_level1_server
 
 ## Tuning
 
-The client can read several variables to 
+The client can read several variables to adjust the behavior.
 
 An example is provided in the [repository](https://github.com/canonical/landscape-client/blob/main/example.conf), and this is a sample [question](https://answers.launchpad.net/landscape-client/+question/403745).
 
+Configuration can be changed in the `client.conf` file:
+
+```
+/etc/landscape/client.conf
+```
 
 For local debugging this might might be useful:
 
 ```
+# Numbers are in seconds
 ping_interval = 5
+package_monitor_interval = 60
+exchange_interval = 120
+apt_update_interval = 300
+```
+
+## Troubleshooting
+
+Make sure to run scripts with the right user `landscape`, or if `root` is used, apply the correct permissions.
+
+```sh
+sudo cat /etc/sudoers
+groups landscape
+```
+
+An example with the docker list:
+
+```sh
+stat /etc/apt/sources.list.d/docker.list
+chmod -v o+r /etc/apt/sources.list.d/docker.list
 ```
 
 ## Monitoring
