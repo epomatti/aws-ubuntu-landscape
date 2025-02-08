@@ -15,3 +15,14 @@ resource "aws_ssm_parameter" "landscape_server" {
   type  = "String"
   value = var.landscape_server_instance_id
 }
+
+### CloudWatch Agent ###
+locals {
+  config_file = file("${path.module}/config-root-only-1s.json")
+}
+
+resource "aws_ssm_parameter" "cloudwatch_config_file" {
+  name  = "AmazonCloudWatch-linux-terraform"
+  type  = "String"
+  value = local.config_file
+}

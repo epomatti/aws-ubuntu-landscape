@@ -9,6 +9,7 @@
         "certbot",
         "cpus",
         "hashicorp",
+        "linux",
         "livepatch",
         "logtype",
         "lsctl",
