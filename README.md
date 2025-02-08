@@ -365,7 +365,7 @@ sudo landscape-config
 ```
 
 > [!WARNING]
-> If you run into a "twisted.internet" error it might be due to [this bug](https://bugs.launchpad.net/landscape-client/+bug/1868730). Check the ownership of `/var/lib/landscape/client`, and if necessary, change it with `sudo chown -R landscape:landscape /var/lib/landscape/client`.
+> If you run into a "twisted.internet" error it might be due to [this bug](https://bugs.launchpad.net/landscape-client/+bug/1868730). Check the ownership of the `/var/lib/landscape/client` structure, it should have `landscape` ownership. If necessary, fix it by running `sudo chown -R landscape:landscape /var/lib/landscape/client`.
 
 Apply a USG a profile:
 
