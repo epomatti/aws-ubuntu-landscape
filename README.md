@@ -232,7 +232,7 @@ Restarting the client:
 sudo service landscape-client restart
 ```
 
-## Ubuntu hardening
+## Ubuntu Hardening
 
 Ubuntu Pro supports [Ubuntu Security Guide (USG)][9]. For quick guide, the [tutorial][14] can be o good starting point.
 
