@@ -535,7 +535,9 @@ Purpose for package management:
 
 - `release` - Official release
 - `security` - Critical security updates
-- `updates` - Bug fixes and stability improvements
+- `updates` - Bug fixes and stability improvements. Tested and approved before being released.
+
+The pockets `proposed` and `backports` do not receive as much testing as `updates`.
 
 This is a common recommendation:
 
