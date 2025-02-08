@@ -519,7 +519,42 @@ sudo rabbitmq-diagnostics environment | grep consumer_timeout
 
 ### Create and Sync the Mirror
 
+#### Volume Space
+
 Packages are going to be downloaded to `/var/lib/landscape/landscape-repository/standalone/` by default.
+
+Follow up the size with `du`:
+
+```sh
+du -h --max-depth=1 | sort -hr
+```
+
+#### Pockets
+
+Purpose for package management:
+
+- `release` - Official release
+- `security` - Critical security updates
+- `updates` - Bug fixes and stability improvements
+
+This is a common recommendation:
+
+```
+deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu focal-security main restricted universe multiverse
+```
+
+#### Components
+
+Components breakdown:
+
+- `main` - Officially supported free software.
+- `restricted` - Proprietary drivers and firmware supported by Ubuntu.
+- `universe` - Community-maintained open-source packages.
+- `multiverse` - Non-free software that Ubuntu does not officially support.
+
+#### PostgreSQL Mirror
 
 On Landscape, add the distribution and the mirror. Example for PostgreSQL:
 
