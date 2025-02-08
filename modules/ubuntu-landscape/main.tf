@@ -47,6 +47,10 @@ resource "aws_instance" "default" {
   root_block_device {
     encrypted   = true
     volume_size = var.volume_size
+
+    tags = {
+      Name = "vol-landscape-host"
+    }
   }
 
   lifecycle {
