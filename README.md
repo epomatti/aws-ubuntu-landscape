@@ -455,6 +455,15 @@ sudo service landscape-client restart
 
 This section will cover mirror configuration. Check out the [repository mirroring](https://ubuntu.com/landscape/docs/explanation-about-repository-mirroring) and [mirror management](https://ubuntu.com/landscape/docs/manage-repositories-web-portal) articles.
 
+### EBS Modifications
+
+> [!CRITICAL]
+> Watch out for EBS modifications rate limit
+
+Be mindful that there might be a 6 hour rate-limit for EBS.
+
+If you reach the limit, then try this [resolution](https://repost.aws/knowledge-center/ebs-resolve-modify-volume-issues) procedure that involves attaching the instance to a new volume from a snapshot.
+
 ### CloudWatch
 
 The CloudWatch Agent has been configured and installed by Terraform. Check its status, and [troubleshoot it](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/troubleshooting-CloudWatch-Agent.html) if necessary:
@@ -512,9 +521,24 @@ sudo rabbitmq-diagnostics environment | grep consumer_timeout
 
 Packages are going to be downloaded to `/var/lib/landscape/landscape-repository/standalone/` by default.
 
-On Landscape, add the distribution and the mirror.
+On Landscape, add the distribution and the mirror. Example for PostgreSQL:
+
+| Configuration | Value                                    |
+|---------------|------------------------------------------|
+| Name          | postgres                                 |
+| URI           | https://apt.postgresql.org/pub/repos/apt |
+| Series name   | `jammy-pgs`                              |
+| Pockets       | `release`                                |
+| Components    | `main`                                   |
+| Architectures | `amd64`                                  |
 
 Now sync the mirror.
+
+Create a repository profile and save to the clients:
+
+```sh
+sudo ls -l /etc/apt/sources.list.d/
+```
 
 ## Profiles
 
