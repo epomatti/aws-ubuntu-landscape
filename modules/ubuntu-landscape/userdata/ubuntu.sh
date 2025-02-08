@@ -29,6 +29,8 @@ dpkg -i -E ./amazon-cloudwatch-agent.deb
 ssmParameterName=AmazonCloudWatch-linux-terraform
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c ssm:$ssmParameterName
 
+rm amazon-cloudwatch-agent.deb
+
 
 ### Required for Ubuntu Landscape
 ubuntuVersion=24.04

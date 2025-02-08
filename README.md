@@ -448,7 +448,15 @@ sudo systemctl <start|stop|restart|status> newrelic-infra
 sudo service landscape-client restart
 ```
 
-## Repositores
+## Mirrors / Repositories
+
+The CloudWatch Agent has been configured and installed by Terraform. Check its status:
+
+```sh
+sudo systemctl status amazon-cloudwatch-agent
+```
+
+
 
 ## Profiles
 
