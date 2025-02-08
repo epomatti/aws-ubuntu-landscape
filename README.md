@@ -105,7 +105,7 @@ lsctl restart
 > [!NOTE]
 > As of this writing, USG is not yet available for [24.04](https://ubuntu.com/security/certifications/docs/usg/cis).
 
-To use the a instance for this purpose, just flip the switch:
+If you want to enable Ubuntu Pro for the created instance, just flip the variable switch:
 
 ```terraform
 create_ubuntu_pro_server = true
