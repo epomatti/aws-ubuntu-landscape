@@ -457,7 +457,7 @@ This section will cover mirror configuration. Check out the [repository mirrorin
 
 ### EBS Modifications
 
-> [!CRITICAL]
+> [!CAUTION]
 > Watch out for EBS modifications rate limit
 
 Be mindful that there might be a 6 hour rate-limit for EBS.
