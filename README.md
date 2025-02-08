@@ -453,6 +453,10 @@ sudo service landscape-client restart
 
 ## Mirrors / Repositories
 
+This section will cover mirror configuration. Check out the [repository mirroring](https://ubuntu.com/landscape/docs/explanation-about-repository-mirroring) and [mirror management](https://ubuntu.com/landscape/docs/manage-repositories-web-portal) articles.
+
+### CloudWatch
+
 The CloudWatch Agent has been configured and installed by Terraform. Check its status, and [troubleshoot it](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/troubleshooting-CloudWatch-Agent.html) if necessary:
 
 ```sh
@@ -460,7 +464,57 @@ sudo systemctl status amazon-cloudwatch-agent
 sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
 ```
 
+### Mirror GPG Key Generation
 
+> [!NOTE]
+> You have to give a real name and email so that he key is generated, otherwise it won't. Check [this video](https://youtu.be/yduAcCqi2z0?list=PLnrmLjoInKWgQdNpMxuMC7rrdoDUgz6YZ) for reference.
+
+> [!IMPORTANT]
+> Landscape mirror keys must not have passwords
+
+```sh
+# Install and run rngd to improve the efficiency of generating the GPG key
+sudo apt-get install rng-tools && sudo rngd -r /dev/urandom
+
+# Either 2 years, or never expire
+gpg --gen-key 
+gpg --full-gen-key
+
+# List the public or secret keys
+gpg -K
+gpg --list-keys
+gpg --list-secret-keys
+
+# Export it
+gpg -a --export-secret-keys {SECRET_KEY_ID} > mirror-key.asc
+```
+
+Just in case deleting a key is required:
+
+```sh
+gpg --delete-secret-key {SECRET_KEY_ID}
+gpg --delete-key {SECRET_KEY_ID}
+```
+
+### RabbitMQ Timeout
+
+> [!TIP]
+> Consider changing the [timeout](https://ubuntu.com/landscape/docs/configure-rabbitmq-for-landscape) for RabbitMQ
+
+```sh
+sudo touch /etc/rabbitmq/rabbitmq
+# Add this (5 hours): consumer_timeout = 18000000
+sudo vim /etc/rabbitmq/rabbitmq
+sudo rabbitmq-diagnostics environment | grep consumer_timeout
+```
+
+### Create and Sync the Mirror
+
+Packages are going to be downloaded to `/var/lib/landscape/landscape-repository/standalone/` by default.
+
+On Landscape, add the distribution and the mirror.
+
+Now sync the mirror.
 
 ## Profiles
 

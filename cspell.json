@@ -15,7 +15,10 @@
         "lsctl",
         "noninteractive",
         "quickstart",
+        "rabbitmq",
+        "rngd",
         "sysinfo",
+        "urandom",
         "virtualbox",
         "xrdp"
     ],

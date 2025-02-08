@@ -11,7 +11,7 @@ landscape_server_fqdn           = "landscape@example.com"
 ec2_landscape_create_elastic_ip = true
 ec2_landscape_ami               = "ami-0ac5d9e789dbb455a" # Canonical, Ubuntu, 24.04, arm64 noble image
 ec2_landscape_instance_type     = "t4g.medium"
-ec2_landscape_volume_size       = 20
+ec2_landscape_volume_size       = 50
 ec2_use_spot_instance           = false
 
 ### Ubuntu test server
