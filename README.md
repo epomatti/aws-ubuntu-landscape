@@ -364,6 +364,9 @@ With the file set, register the machine:
 sudo landscape-config
 ```
 
+> [!WARNING]
+> If you run into a "twisted.internet" error it might be due to [this bug](https://bugs.launchpad.net/landscape-client/+bug/1868730). Check the ownership of `/var/lib/landscape/client`, and if necessary, change it with `sudo chown -R landscape:landscape /var/lib/landscape/client`.
+
 Apply a USG a profile:
 
 ```sh
