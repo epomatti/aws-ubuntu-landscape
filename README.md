@@ -453,10 +453,11 @@ sudo service landscape-client restart
 
 ## Mirrors / Repositories
 
-The CloudWatch Agent has been configured and installed by Terraform. Check its status:
+The CloudWatch Agent has been configured and installed by Terraform. Check its status, and [troubleshoot it](https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/troubleshooting-CloudWatch-Agent.html) if necessary:
 
 ```sh
 sudo systemctl status amazon-cloudwatch-agent
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -m ec2 -a status
 ```
 
 
