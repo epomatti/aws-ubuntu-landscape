@@ -531,6 +531,10 @@ du -h --max-depth=1 | sort -hr
 
 #### Pockets
 
+It's important to understand this bit of the [documentation](https://ubuntu.com/landscape/docs/manage-repositories-with-the-API#heading--add-pockets-to-the-repository-profile):
+
+> Landscape will take over the client's apt sources. The original `sources.list` file will be moved aside and only the ones enabled in Landscape will work.
+
 Purpose for package management:
 
 - `release` - Official release
@@ -542,9 +546,9 @@ The pockets `proposed` and `backports` do not receive as much testing as `update
 This is a common recommendation:
 
 ```
-deb http://archive.ubuntu.com/ubuntu focal main restricted universe multiverse
-deb http://archive.ubuntu.com/ubuntu focal-updates main restricted universe multiverse
-deb http://security.ubuntu.com/ubuntu focal-security main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu jammy main restricted universe multiverse
+deb http://archive.ubuntu.com/ubuntu jammy-updates main restricted universe multiverse
+deb http://security.ubuntu.com/ubuntu jammy-security main restricted universe multiverse
 ```
 
 #### Components
