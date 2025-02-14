@@ -407,6 +407,12 @@ package_monitor_interval = 1800
 snap_monitor_interval = 1800
 ```
 
+Changing this configuration will require a client restart:
+
+```sh
+sudo service landscape-client restart
+```
+
 ## Troubleshooting
 
 Make sure to run scripts with the right user `landscape`, or if `root` is used, apply the correct permissions.
@@ -610,6 +616,7 @@ Dearmor the key and copy it:
 
 ```sh
 sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/graphics-drivers-ppa.gpg graphics-drivers-ppa.asc
+sudo chmod 644 /etc/apt/trusted.gpg.d/graphics-drivers-ppa.gpg
 ```
 
 Confirm that the key is correctly installed:
@@ -646,6 +653,23 @@ Or installed if necessary:
 
 ```sh
 apt install nvidia-driver-535
+```
+
+### Issues with APT
+
+```sh
+sudo dpkg -r <package> # or sudo dpkg -P <program>
+sudo apt purge <package>
+sudo apt clean
+sudo apt --fix-broken install
+sudo apt autoremove
+```
+
+In some scenarios, a direct and / or forced removal might be necessary:
+
+```sh
+sudo dpkg -i --force-overwrite /var/cache/apt/archives/postgresql-client-common_272.pgdg22.04+1_all.deb
+sudo apt --fix-broken install
 ```
 
 ## Profiles
