@@ -597,24 +597,55 @@ If the key is not visible in there, manually create the following URL:
 https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
 ```
 
-Download the key manually:
+Download the key manually. Use the `0x` prefix with followed by the last **16 digits** of the key, which are the key id:
 
-```
-https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2388FF3BE10A76F638F80723FCAE110B1118213C
+```sh
+curl -L "https://keyserver.ubuntu.com/pks/lookup?op=get&search=0xFCAE110B1118213C" -o graphics-drivers-ppa.asc
 ```
 
-If required, dearmor the key:
+Dearmor the key and copy it:
 
+> [!NOTE]
+> Either `/etc/apt/keyrings/` or `/etc/apt/trusted.gpg.d/` could be used based on security requirements.
+
+```sh
+sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/graphics-drivers-ppa.gpg graphics-drivers-ppa.asc
 ```
-sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/<repo-name>.gpg
+
+Confirm that the key is correctly installed:
+
+```sh
+sudo gpg --no-default-keyring --keyring /etc/apt/trusted.gpg.d/graphics-drivers-ppa.gpg --list-keys
 ```
 
 #### PPA APT Sources
 
-In the cause of `graphics-drivers`, it will resolve to this:
+In the cause of `graphics-drivers`, these are the examples for APT sources.
+
+When storing the keys in `/etc/apt/trusted.gpg.d/`, the key should be trusted:
 
 ```
 deb http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu jammy main
+```
+
+If storing it under `/etc/apt/keyrings/`, then an explicit declaration is required:
+
+```
+deb [signed-by=/etc/apt/keyrings/graphics-drivers-ppa.asc] http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu jammy main
+```
+
+#### Testing
+
+Check if the package is available:
+
+```sh
+apt-cache search nvidia-driver-535
+```
+
+Or installed if necessary:
+
+```sh
+apt install nvidia-driver-535
 ```
 
 ## Profiles
