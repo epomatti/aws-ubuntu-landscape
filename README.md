@@ -57,6 +57,9 @@ dig landscape.example.com
 
 Attach the server to your Ubuntu Pro subscription. You're currently allowed 5 machines in the Personal free subscription.
 
+> [!TIP]
+> Don't need to attach again when using cloud Ubuntu Pro image
+
 ```sh
 pro attach
 ```
