@@ -10,7 +10,7 @@ cp config/template.tfvars .auto.tfvars
 
 Set the required variables:
 
-- `landscape_server_fqdn` - This will be the internet FQDN for the Landscape server. It is best to use a real domain for this.
+- `landscape_server_fqdn` - Internet FQDN for the Landscape server.
 - `landscape_certbot_email` - Required while setting `certbot` certificates.
 
 Create the infrastructure:
