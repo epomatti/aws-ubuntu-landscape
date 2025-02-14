@@ -581,6 +581,42 @@ Create a repository profile and save to the clients:
 sudo ls -l /etc/apt/sources.list.d/
 ```
 
+### PPA
+
+To configure PPA repositories we need to deconstruct the configuration process.
+
+#### PPA Key
+
+Go to https://launchpad.net/ and find the repository in the format `ppa:example/ppa`.
+
+This example will use `ppa:graphics-drivers/ppa`.
+
+If the key is not visible in there, manually create the following URL:
+
+```
+https://launchpad.net/~graphics-drivers/+archive/ubuntu/ppa
+```
+
+Download the key manually:
+
+```
+https://keyserver.ubuntu.com/pks/lookup?op=get&search=0x2388FF3BE10A76F638F80723FCAE110B1118213C
+```
+
+If required, dearmor the key:
+
+```
+sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/<repo-name>.gpg
+```
+
+#### PPA APT Sources
+
+In the cause of `graphics-drivers`, it will resolve to this:
+
+```
+deb http://ppa.launchpad.net/graphics-drivers/ppa/ubuntu jammy main
+```
+
 ## Profiles
 
 This [YouTube video](https://youtu.be/LreS6DhboYM) gives a run through the Profiles feature.
