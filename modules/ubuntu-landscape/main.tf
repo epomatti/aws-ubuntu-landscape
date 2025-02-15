@@ -8,7 +8,6 @@ resource "aws_iam_instance_profile" "default" {
 }
 
 resource "aws_eip" "default" {
-  count    = var.ec2_landscape_create_elastic_ip ? 1 : 0
   instance = aws_instance.default.id
   domain   = "vpc"
 }
@@ -124,7 +123,6 @@ resource "aws_security_group_rule" "allow_ingress_http" {
   security_group_id = aws_security_group.default.id
 }
 
-
 resource "aws_security_group_rule" "allow_ingress_https" {
   type              = "ingress"
   from_port         = 443
@@ -142,7 +140,6 @@ resource "aws_security_group_rule" "allow_ingress_grpc" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.default.id
 }
-
 
 resource "aws_security_group_rule" "allow_egress_internet_http" {
   type              = "egress"
