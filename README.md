@@ -77,6 +77,12 @@ Set your hostname using variables:
 hostnamectl set-hostname "$FQDN"
 ```
 
+It would be a good idea to reboot after changing the hostname:
+
+```sh
+reboot
+```
+
 Install Landscape:
 
 ```sh
@@ -87,6 +93,9 @@ Install your certificate:
 
 > [!IMPORTANT]
 > Make sure the certificate is correctly issued and installed
+
+> [!TIP]
+> If you rebooted, make sure to re-enter the required variables
 
 ```sh
 certbot --non-interactive --apache --no-redirect --agree-tos --email $CERTBOT_EMAIL --domains $FQDN
