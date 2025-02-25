@@ -723,6 +723,12 @@ To generate the credentials, one way is to use the [App Password](https://myacco
 
 For deep dive details and troubleshooting, check the Ubuntu Server documentation [page](https://documentation.ubuntu.com/server/how-to/mail-services/install-postfix/).
 
+Check for errors on both files:
+
+```sh
+tail -f /var/log/mail.log
+tail -f /var/log/mail.err
+```
 
 ## Miscellaneous
 
