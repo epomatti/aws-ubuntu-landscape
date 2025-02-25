@@ -719,6 +719,12 @@ Direct interaction with the API is possible via [API Endpoints](https://ubuntu.c
 
 Following the official [documentation](https://ubuntu.com/landscape/docs/configure-postfix-for-emails) but for Google's [SMTP Relay](https://support.google.com/a/answer/2956491?sjid=4703699716623319216-SA).
 
+The SMTP Host will be the Gmail URL:
+
+```
+smtp.gmail.com
+```
+
 To generate the credentials, one way is to use the [App Password](https://myaccount.google.com/apppasswords) feature. Reference from [linode](https://www.linode.com/docs/guides/configure-postfix-to-send-mail-using-gmail-and-google-workspace-on-debian-or-ubuntu/).
 
 For deep dive details and troubleshooting, check the Ubuntu Server documentation [page](https://documentation.ubuntu.com/server/how-to/mail-services/install-postfix/).
