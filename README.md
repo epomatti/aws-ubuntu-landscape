@@ -15,6 +15,13 @@ Create the `.auto.tfvars` variables file:
 cp config/template.tfvars .auto.tfvars
 ```
 
+Choose a current AMI from the Canonical SSM index. Example:
+
+```sh
+aws ssm get-parameters --names \
+   /aws/service/canonical/ubuntu/pro-server/24.04/stable/current/arm64/hvm/ebs-gp3/ami-id
+```
+
 Set the required variables:
 
 - `landscape_server_fqdn` - Internet FQDN for the Landscape server.

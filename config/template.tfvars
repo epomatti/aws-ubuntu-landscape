@@ -8,7 +8,7 @@ landscape_certbot_email = "you@example.com"
 ### Ubuntu Landscape instance
 create_ubuntu_landscape     = false
 landscape_server_fqdn       = "landscape@example.com"
-ec2_landscape_ami           = "ami-0ac5d9e789dbb455a" # Canonical, Ubuntu, 24.04, arm64 noble image
+ec2_landscape_ami           = "ami-0b14a7269696d2dcb" # Canonical, Ubuntu Server Pro, 24.04 LTS, arm64 noble image
 ec2_landscape_instance_type = "t4g.medium"
 ec2_landscape_volume_size   = 50
 ec2_use_spot_instance       = false
