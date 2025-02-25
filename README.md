@@ -726,8 +726,14 @@ For deep dive details and troubleshooting, check the Ubuntu Server documentation
 Check for errors on both files:
 
 ```sh
-tail -f /var/log/mail.log
-tail -f /var/log/mail.err
+sudo tail -f /var/log/mail.log
+sudo tail -f /var/log/mail.err
+```
+
+You may also want to check the `syslog`:
+
+```sh
+sudo tail -f /var/log/syslog
 ```
 
 ## Miscellaneous
