@@ -679,9 +679,18 @@ sudo apt autoremove
 
 In some scenarios, a direct and / or forced removal might be necessary:
 
+> [!NOTE]
+> This can happen for example with this PostgreSQL [package conflict](https://github.com/saltstack-formulas/postgres-formula/issues/327).
+
 ```sh
 sudo dpkg -i --force-overwrite /var/cache/apt/archives/postgresql-client-common_272.pgdg22.04+1_all.deb
 sudo apt --fix-broken install
+```
+
+Other commands that can be used ([SO reference](https://askubuntu.com/questions/525088/how-to-delete-broken-packages-in-ubuntu)):
+
+```sh
+sudo dpkg --purge nodejs-legacy
 ```
 
 ## Profiles
