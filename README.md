@@ -2,6 +2,13 @@
 
 ## Create the AWS resources
 
+Securely connect to your profile with SSO:
+
+```sh
+export AWS_PROFILE="<PROFILE>"
+aws sso login
+```
+
 Create the `.auto.tfvars` variables file:
 
 ```sh
