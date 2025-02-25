@@ -158,3 +158,12 @@ resource "aws_security_group_rule" "allow_egress_internet_https" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.default.id
 }
+
+resource "aws_security_group_rule" "allow_egress_internet_smtp" {
+  type              = "egress"
+  from_port         = 587
+  to_port           = 587
+  protocol          = "TCP"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.default.id
+}
