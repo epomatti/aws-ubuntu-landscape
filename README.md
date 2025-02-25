@@ -99,7 +99,7 @@ apt update && DEBIAN_FRONTEND=noninteractive apt-get install -y landscape-server
 Install your certificate:
 
 > [!IMPORTANT]
-> Make sure the certificate is correctly issued and installed
+> Make sure that after these steps the certificate is correctly issued and installed. This will required by the landscape client configuration later
 
 > [!TIP]
 > If you rebooted, make sure to re-enter the required variables
