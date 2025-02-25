@@ -13,6 +13,7 @@
         "dpkg",
         "hashicorp",
         "keyrings",
+        "linode",
         "linux",
         "livepatch",
         "logtype",
