@@ -15,7 +15,7 @@ Create the `.auto.tfvars` variables file:
 cp config/template.tfvars .auto.tfvars
 ```
 
-Choose a current AMI from the Canonical SSM index. Example:
+Choose a current AMI from the [Canonical SSM index](https://documentation.ubuntu.com/aws/en/latest/aws-how-to/instances/find-ubuntu-images/). Example:
 
 ```sh
 aws ssm get-parameters --names \
