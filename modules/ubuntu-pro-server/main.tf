@@ -109,3 +109,13 @@ resource "aws_security_group_rule" "allow_egress_internet_https" {
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.default.id
 }
+
+resource "aws_security_group_rule" "alloy_ingress" {
+  description = "Grafana Alloy port for troubleshooting"
+  type              = "ingress"
+  from_port         = 12345
+  to_port           = 12345
+  protocol          = "TCP"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = aws_security_group.default.id
+}
